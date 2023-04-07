@@ -3,6 +3,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
+import Axios from 'axios'
 
 import './assets/main.css'
 
@@ -21,8 +22,11 @@ library.add(faUserSecret)
 
 const app = createApp(App)
 
+
+
 .component('font-awesome-icon', FontAwesomeIcon)
 
+app.config.globalProperties.$http = Axios
 app.use(router)
 app.use(ElementPlus)
 

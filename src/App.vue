@@ -15,12 +15,13 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 nav {
   display: flex;
-}
-.route-link {
+  .route-link {
   width: 150px;
   height: 50px;
+  }
 }
+
 </style>

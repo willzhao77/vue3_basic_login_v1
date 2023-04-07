@@ -16,6 +16,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style lang="scss" scoped>
+@import url('./assets/reset.css');
 nav {
   display: flex;
   .route-link {

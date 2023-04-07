@@ -4,8 +4,13 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <div class="link">
+    <div>
       <el-button>Default</el-button>
+      <el-button>Default</el-button>
+      <el-button>Default</el-button>
+      <font-awesome-icon icon="fa-solid fa-user-secret" />
+    </div>
+    <div class="link">
       <nav>
         <RouterLink to="/" class="route-link">Home</RouterLink>
         <RouterLink to="/about" class="route-link">About</RouterLink>

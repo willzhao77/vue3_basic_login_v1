@@ -6,15 +6,17 @@
                     <span>Register Account</span>
                 </div>
             </template>
-            <el-form :model="form" label-width="120px">
-                    <el-form-item label="Name">
+            <el-form :model="form" label-width="120px" ref="ruleFormRef"
+            :rules="rules"
+            >
+                    <el-form-item label="Name" prop="name">
                         <el-input v-model="form.name" />
                     </el-form-item>
                     <el-form-item label="Password">
                         <el-input v-model="form.password" />
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">Create</el-button>
+                        <el-button type="primary" @click="onSubmit(ruleFormRef)">Create</el-button>
                         <el-button>Cancel</el-button>
                     </el-form-item>
                 </el-form>
@@ -23,13 +25,30 @@
 </template>
 
 <script setup>
-import {reactive} from 'vue'
+import {reactive, ref} from 'vue'
 
-const form = reactive([])
+const ruleFormRef = ref()
 
-function onSubmit () {
-    console.log('submit', form)
+const rules = reactive({
+    name: [
+        { required: true, message: 'Please input  name', trigger: 'blur' },
+        { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
+    ],
+})
+
+const form = reactive({})
+
+const onSubmit = async (formEl) => {
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      console.log('submit!')
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
 }
+
 </script>
 
 <style lang="scss" scoped>

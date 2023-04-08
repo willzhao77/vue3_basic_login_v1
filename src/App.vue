@@ -13,7 +13,7 @@ import { RouterView } from 'vue-router'
 #app {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  color: #2c3e50;  
+  color: #2c3e50;
 }
 
 </style>

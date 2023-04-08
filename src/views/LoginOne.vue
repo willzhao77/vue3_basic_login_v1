@@ -26,7 +26,6 @@
 
 <script setup>
 import {reactive, ref} from 'vue'
-import { ElMessage } from 'element-plus'
 
 const ruleFormRef = ref()
 
@@ -44,10 +43,6 @@ const onSubmit = async (formEl) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       console.log('submit!')
-      ElMessage({
-        message: 'submitted!!!',
-        type: 'success',
-      })
     } else {
       console.log('error submit!', fields)
     }

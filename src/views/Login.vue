@@ -53,18 +53,19 @@ const onSubmit = async (formEl) => {
       .then((res)=> {
         console.log(res)
 
-        if(res.status === 200) {
-            //save token to local storage
-            setToken('username', res.data.username)
+        // if(res.status === 200) {
+        //     //save token to local storage
+        //     setToken('username', res.data.username)
 
-            ElMessage({
-                message: 'submitted!!!',
-                type: 'success',
-            })
-        }
-      }).catch ((err) => {
-        console.log(err)
-      })
+        //     ElMessage({
+        //         message: 'submitted!!!',
+        //         type: 'success',
+        //     })
+        // }
+
+    }).catch ((err) => {
+        console.log('!!', err)
+    })
     } else {
       console.log('error submit!', fields)
     }

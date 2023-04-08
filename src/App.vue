@@ -1,34 +1,19 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <div>
-      <el-button>Default</el-button>
-      <el-button>Default</el-button>
-      <el-button>Default</el-button>
-      <font-awesome-icon icon="fa-solid fa-user-secret" />
-    </div>
-    <div class="link">
-      <nav>
-        <RouterLink to="/" class="route-link">Home</RouterLink>
-        <RouterLink to="/about" class="route-link">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <div id="app">
+    <RouterView />
+  </div>
 </template>
 
 <style lang="scss" scoped>
 @import url('./assets/reset.css');
-nav {
-  display: flex;
-  .route-link {
-  width: 150px;
-  height: 50px;
-  }
+#app {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #2c3e50;  
 }
 
 </style>

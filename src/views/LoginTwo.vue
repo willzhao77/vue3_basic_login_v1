@@ -25,18 +25,24 @@
 </template>
 
 <script setup>
-import {reactive, ref, getCurrentInstance} from 'vue'
+import {reactive, ref} from 'vue'
 import { ElMessage } from 'element-plus'
-import {nameRule} from '../utils/validate.js'
-import { setToken } from '@/utils/setToken.js'
-
-const currentInstance = getCurrentInstance()
-const { $http} = currentInstance.appContext.config.globalProperties
 
 const ruleFormRef = ref()
 
+const validateName = (rule, value, callback) => {
+    const reg = /(^[a-zA-Z0-9]{4,10}$)/
+    if (!value) {
+        return callback(new Error('Please input the age'))
+    } else if (!reg.test(value)) {
+        callback(new Error('please enter name between 4-10 charators.'))
+    } else {
+        callback()
+    }
+}
+
 const rules = {
-    username: [{ validator: nameRule, trigger: 'blur' }],
+    username: [{ validator: validateName, trigger: 'blur' }],
 }
 
 const form = reactive({
@@ -49,22 +55,9 @@ const onSubmit = async (formEl) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       console.log('submit!')
-      const { $http} = currentInstance.appContext.config.globalProperties
-      $http("https://jsonplaceholder.typicode.com/users/1", form)
-      .then((res)=> {
-        console.log(res)
-
-        if(res.status === 200) {
-            //save token to local storage
-            setToken('username', res.data.username)
-
-            ElMessage({
-                message: 'submitted!!!',
-                type: 'success',
-            })
-        }
-      }).catch ((err) => {
-        console.log(err)
+      ElMessage({
+        message: 'submitted!!!',
+        type: 'success',
       })
     } else {
       console.log('error submit!', fields)

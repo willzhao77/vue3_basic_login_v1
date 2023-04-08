@@ -49,7 +49,6 @@ const onSubmit = async (formEl) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       console.log('submit!')
-      const { $http} = currentInstance.appContext.config.globalProperties
       $http("https://jsonplaceholder.typicode.com/users/1", form)
       .then((res)=> {
         console.log(res)

@@ -9,8 +9,8 @@
             <el-form :model="form" label-width="120px" ref="ruleFormRef"
             :rules="rules"
             >
-                    <el-form-item label="Name" prop="name">
-                        <el-input v-model="form.name" />
+                    <el-form-item label="Name" prop="username">
+                        <el-input v-model="form.username" />
                     </el-form-item>
                     <el-form-item label="Password">
                         <el-input v-model="form.password" />
@@ -30,14 +30,25 @@ import { ElMessage } from 'element-plus'
 
 const ruleFormRef = ref()
 
-const rules = reactive({
-    name: [
-        { required: true, message: 'Please input  name', trigger: 'blur' },
-        { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
-    ],
-})
+const validateName = (rule, value, callback) => {
+    const reg = /(^[a-zA-Z0-9]{4,10}$)/
+    if (!value) {
+        return callback(new Error('Please input the age'))
+    } else if (!reg.test(value)) {
+        callback(new Error('please enter name between 4-10 charators.'))
+    } else {
+        callback()
+    }
+}
 
-const form = reactive({})
+const rules = {
+    username: [{ validator: validateName, trigger: 'blur' }],
+}
+
+const form = reactive({
+    username: '',
+    password: ''
+})
 
 const onSubmit = async (formEl) => {
   if (!formEl) return

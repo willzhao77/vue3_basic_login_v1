@@ -33,4 +33,14 @@ function onSubmit () {
 </script>
 
 <style lang="scss" scoped>
+.login {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #409eff;
+    .box-card {
+        width: 450px;
+        margin: 200px auto;
+    }
+}
 </style>

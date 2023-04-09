@@ -18,7 +18,16 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: () => import('../views/HomeView.vue')
-    }
+    },
+    {
+      path: '/404',
+      name: 'NotFound',
+      component: () => import('../views/NotFound.vue')
+    },
+    {
+      path: "/:catchAll(.*)", // Unrecognized path automatically matches 404
+      redirect: '/404'
+    },
   ]
 })
 

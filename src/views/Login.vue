@@ -99,6 +99,9 @@ const onSubmit = async (formEl) => {
     position: absolute;
     background: #409eff;
     .box-card {
+        background: #65768557;
+    }
+    .box-card {
         width: 450px;
         margin: 200px auto;
     }

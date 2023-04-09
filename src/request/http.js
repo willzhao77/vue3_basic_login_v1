@@ -20,10 +20,10 @@ http.interceptors.request.use((config) => {
 //添加响应拦截器
 http.interceptors.response.use ( (response) => {
     //对响应数据做些什么
-    // let {status, message} = response.date
-    // if(status !== 200) {
-    //     ElMessage ({message: message || 'error', type: 'warning'})
-    // }
+    let {status, message} = response.data
+    if(status !== 200) {
+        ElMessage ({message: message || 'error', type: 'warning'})
+    }
     return response
 }, (error) => {
     return Promise.reject (error)

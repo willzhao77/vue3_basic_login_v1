@@ -49,19 +49,18 @@ const onSubmit = async (formEl) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       console.log('submit!')
-      $http("https://jsonplaceholder.typicode.com/users/1", form)
+      $http.post("/login", form)
       .then((res)=> {
         console.log(res)
-
-        // if(res.status === 200) {
-        //     //save token to local storage
-        //     setToken('username', res.data.username)
-
-        //     ElMessage({
-        //         message: 'submitted!!!',
-        //         type: 'success',
-        //     })
-        // }
+        if(res.data.status === 200) {
+            //save token to local storage
+            setToken('username', res.data.username)
+            setToken('token', res.data.token)
+            ElMessage({
+                message: 'submitted!!!',
+                type: 'success',
+            })
+        }
 
     }).catch ((err) => {
         console.log('!!', err)

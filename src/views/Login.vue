@@ -29,6 +29,7 @@ import {reactive, ref, getCurrentInstance} from 'vue'
 import { ElMessage } from 'element-plus'
 import {nameRule} from '../utils/validate.js'
 import { setToken } from '@/utils/setToken.js'
+import { login } from '@/request/api.js'
 
 const currentInstance = getCurrentInstance()
 const { $http} = currentInstance.appContext.config.globalProperties
@@ -48,23 +49,41 @@ const onSubmit = async (formEl) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log('submit!')
-      $http.post("/login", form)
-      .then((res)=> {
-        console.log(res)
-        if(res.data.status === 200) {
-            //save token to local storage
-            setToken('username', res.data.username)
-            setToken('token', res.data.token)
-            ElMessage({
-                message: 'submitted!!!',
-                type: 'success',
-            })
-        }
+        console.log('submit!')
 
-    }).catch ((err) => {
-        console.log('!!', err)
-    })
+        /* 把登陆接口进行封装, api.js
+        $http.post("/login", form)
+        .then((res)=> {
+            console.log(res)
+            if(res.data.status === 200) {
+                //save token to local storage
+                setToken('username', res.data.username)
+                setToken('token', res.data.token)
+                ElMessage({
+                    message: 'submitted!!!',
+                    type: 'success',
+                })
+            }
+
+        }).catch ((err) => {
+            console.log('!!', err)
+        })
+        */
+
+        //封装后的使用
+        login(form).then((res)=> {
+            if(res.data.status === 200) {
+                //save token to local storage
+                setToken('username', res.data.username)
+                setToken('token', res.data.token)
+                ElMessage({
+                    message: 'submitted!!!',
+                    type: 'success',
+                })
+            }
+        }).catch ((err) => {
+            console.log(err)
+        })
     } else {
       console.log('error submit!', fields)
     }
